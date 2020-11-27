@@ -12,7 +12,7 @@ void coeficientes(int i, int quocientes[]){
     if( i % 2 == 0) coefs[0] *= -1;
     else coefs[1] *= -1;
 
-    printf("s: %d   |  t: %d  \n", coefs[0], coefs[1]);
+    printf("%d\n", coefs[0]);
 
 }
 
@@ -34,5 +34,6 @@ void mdc(int a, int b, int i, int quocientes[]){
 int main(){
     int a, b, quocientes[100];
     scanf("%d %d", &a, &b);
+    printf("O inverso de %d (mod %d) = ", a, b);
     a <= b ? mdc(a, b, 0, quocientes) : mdc(b, a, 0, quocientes);
 }
