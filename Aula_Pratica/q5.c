@@ -10,7 +10,9 @@ int mdc(int a, int b){
     
 int main(){
     int a, b;
+    int res;
     scanf("%d %d", &a, &b);
-    int res = mdc(a, b);
+    res = a <= b ? mdc(a, b) : mdc(b, a);  
+    // int res = mdc(a, b);
     printf("MDC(%d,%d) = %d\n", a, b, res);
 }

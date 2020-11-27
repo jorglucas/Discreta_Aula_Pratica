@@ -1,57 +1,38 @@
 #include <stdio.h>
 
-int euclides(int a, int b, int i, int q[])
-{
-      if(a % b == 0)
-      {
-        ++i;
-        q[i] = a / b;
-        return --i;
-      }
+void coeficientes(int i, int quocientes[]){
+    int coefs[2], res;
+    coefs[0] = 0, coefs[1] = 1;
 
-      else
-      {
-        q[i] = a / b;
-        euclides(b, a % b, ++i, q);
-      }
+    for(int j = i - 1; j >= 0; --j){
+        res = (quocientes[j] * coefs[1]) + coefs[0];
+        coefs[0] = coefs[1];
+        coefs[1] = res;
+    }
+    if( i % 2 == 0) coefs[0] *= -1;
+    else coefs[1] *= -1;
+
+    printf("s: %d   |  t: %d  \n", coefs[0], coefs[1]);
+
 }
 
-void ordenar(int q[], int st[], int t, int t1, int i)
-{
-    if(t < 0)
-    {
-        return;
-    }
-    else
-    {
-        st[t1] = q[t];
-        ordenar(q, st, --t, ++t1, ++i);
-    }
-}
+void mdc(int a, int b, int i, int quocientes[]){
+    int resto = 0;
+    
+    quocientes[i] = a / b;
+    resto = a - (quocientes[i] * b);
 
-int main()
-{
-  int a,b, k, i = 1;
-  scanf("%d %d", &a, &b);
-  int q[999];
-  int t = euclides(a, b, 0, q);
-  int st[t - 1];
-  ordenar(q, st, t - 1, 0, 0);
-  int val[t];
-  val[0] = 1;
-  val[1] = st[0];
-  for(k = 2; k < t + 1; ++k)
-  {
-      val[k] = (st[i] * val[i]) + val[i - 1];
-      ++i;
-  }
-  if(i % 2 == 0)
-  {
-    printf("s = %d\nt = %d\n",val[t - 1] * - 1, val[t]); 
-  }
-  else
-  {
-    printf("s = %d\nt = %d\n",val[t - 1], val[t] * - 1);
-  }
-    return 0;
+    if(resto == 0){
+        if(b != 1) printf("A e B não são coprimos.\n");
+        else{  
+            coeficientes(i, quocientes);
+        } 
+    }
+    else mdc(b, resto, ++i, quocientes);
+}
+    
+int main(){
+    int a, b, quocientes[100];
+    scanf("%d %d", &a, &b);
+    a <= b ? mdc(a, b, 0, quocientes) : mdc(b, a, 0, quocientes);
 }

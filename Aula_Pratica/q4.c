@@ -55,7 +55,7 @@ void funcMdc(int a, int b, int num){
     if(num < 8){
         if(a % num == 0 && b % num == 0){
             mdc *= num;
-            funcMdc(a / num, b / num, num);
+            funcMdc(a / num, b / num, num);     
         }
         else funcMdc(a, b, ++num);
     } 
