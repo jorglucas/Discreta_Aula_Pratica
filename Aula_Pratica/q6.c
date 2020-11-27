@@ -11,9 +11,7 @@ void coeficientes(int i, int quocientes[]){
     }
     if( i % 2 == 0) coefs[0] *= -1;
     else coefs[1] *= -1;
-
-    printf("s: %d   |  t: %d  \n", coefs[0], coefs[1]);
-
+    printf("s: %d   |    t: %d\n", coefs[0], coefs[1]);
 }
 
 void mdc(int a, int b, int i, int quocientes[]){
@@ -23,10 +21,7 @@ void mdc(int a, int b, int i, int quocientes[]){
     resto = a - (quocientes[i] * b);
 
     if(resto == 0){
-        if(b != 1) printf("A e B não são coprimos.\n");
-        else{  
-            coeficientes(i, quocientes);
-        } 
+        coeficientes(i, quocientes);
     }
     else mdc(b, resto, ++i, quocientes);
 }
@@ -34,5 +29,5 @@ void mdc(int a, int b, int i, int quocientes[]){
 int main(){
     int a, b, quocientes[100];
     scanf("%d %d", &a, &b);
-    a <= b ? mdc(a, b, 0, quocientes) : mdc(b, a, 0, quocientes);
+    mdc(a, b, 0, quocientes);
 }

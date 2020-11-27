@@ -35,5 +35,5 @@ int main(){
     int a, b, quocientes[100];
     scanf("%d %d", &a, &b);
     printf("O inverso de %d (mod %d) = ", a, b);
-    a <= b ? mdc(a, b, 0, quocientes) : mdc(b, a, 0, quocientes);
+    mdc(a, b, 0, quocientes);
 }
