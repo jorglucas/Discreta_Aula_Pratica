@@ -2,27 +2,28 @@
 
 int mdc();
 void coeficientes();
-int quocientes[100], i = 0, s, t;
+void soluc();
+int quocientes[100], i = 0, s, t, k = 1;
 
 int main(){
-    int a, b, m;
+    int a, b, m, solucoes;
     scanf("%d %d %d", &a, &b, &m);
     printf("Para encontrar a solução de uma congruência do tipo\nax ≡ b mod m, informe a, b e m:\n");
     
     // I. achar o mdc(a, m);
-    int res = mdc(a, m);  
+    int res = mdc(a, m);
     // Verificar se o mdc divide b;
-        if(b % res == 0){ 
-            // Temos as possíveis soluções (res).
+        if(b % res == 0){
+            // Temos as possíveis soluções (solucoes).
+            solucoes = res; 
             while(res != 1){
-                a /= res;
-                b /= res;
-                m /= res;
                 i = 0;
-                res = mdc(a, m);
+                res = mdc(a / res, m / res);
             }
             coeficientes(a, m);
             printf("s = %d\nt = %d\n", s, t);
+            // Achar todas as possíveis soluções:
+            soluc(b, m, solucoes);
 
 
         }
@@ -80,5 +81,23 @@ void coeficientes(int a, int m){
             s = coefs[0];
             t = coefs[1];
         }
+    }
+}
+
+void soluc(int b, int m, int solucoes){
+    int sl[solucoes];
+    sl[0] = s * b;
+    while(sl[0] > m) sl[0] %= m;
+
+    for(int j = 1; j < solucoes; j++){
+        sl[j] = sl[0] + m*k;
+        while(sl[j] > m) sl[j] %= m;
+        ++k;
+    }
+
+    printf("\nSOLUCOES POSSIVEIS: %d\n", solucoes);
+
+    for(int j = 0; j < solucoes; j++){
+        printf("S[%d] = %d\n", j + 1, sl[j]);
     }
 }
