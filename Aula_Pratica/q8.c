@@ -6,29 +6,29 @@ void soluc();
 int quocientes[100], i = 0, s, t, k = 1;
 
 int main(){
-    int a, b, m, solucoes;
+    int a, b, m, solucoes, mInterval;
     scanf("%d %d %d", &a, &b, &m);
     printf("Para encontrar a solução de uma congruência do tipo\nax ≡ b mod m, informe a, b e m:\n");
     
     // I. achar o mdc(a, m);
     int res = mdc(a, m);
     // Verificar se o mdc divide b;
-        if(b % res == 0){
-            // Temos as possíveis soluções (solucoes).
-            solucoes = res; 
-            while(res != 1){
-                i = 0;
-                res = mdc(a / res, m / res);
-            }
-            coeficientes(a, m);
-            printf("s = %d\nt = %d\n", s, t);
-            // Achar todas as possíveis soluções:
-            soluc(b, m, solucoes);
-
-
-        }
-
-
+    if(b % res == 0){
+        // Temos as possíveis soluções (solucoes).
+        solucoes = res; 
+        mInterval = m;
+        i = 0;
+        a /= res;
+        b /= res;
+        m /= res;
+        res = mdc(a, m);
+        coeficientes(a, m);
+        // Achar todas as possíveis soluções:
+        soluc(b, m, mInterval, solucoes);
+    }
+    else {
+        printf("A congruência não tem solução.");
+    }
 }
 
 int mdc(int a, int m){
@@ -38,7 +38,6 @@ int mdc(int a, int m){
     resto = a - (quocientes[i] * m);
 
     if(resto == 0){
-        printf("mdc = %d\n", m);
         return m;
     }
     else{
@@ -84,18 +83,19 @@ void coeficientes(int a, int m){
     }
 }
 
-void soluc(int b, int m, int solucoes){
+void soluc(int b, int m, int mInterval, int solucoes){
     int sl[solucoes];
     sl[0] = s * b;
-    while(sl[0] > m) sl[0] %= m;
+    while(sl[0] > mInterval) sl[0] %= mInterval;
+
+    printf("\nSOLUÇÃO GERAL: %d + %dk, com k inteiro.\n", sl[0], m);
 
     for(int j = 1; j < solucoes; j++){
-        sl[j] = sl[0] + m*k;
-        while(sl[j] > m) sl[j] %= m;
+        sl[j] = (sl[0] + m*k);
         ++k;
     }
 
-    printf("\nSOLUCOES POSSIVEIS: %d\n", solucoes);
+    printf("\nSOLUÇÕES POSSIVEIS: %d\n", solucoes);
 
     for(int j = 0; j < solucoes; j++){
         printf("S[%d] = %d\n", j + 1, sl[j]);
