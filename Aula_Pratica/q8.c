@@ -7,8 +7,8 @@ int quocientes[100], i = 0, s, t, k = 1;
 
 int main(){
     int a, b, m, solucoes, mInterval;
-    scanf("%d %d %d", &a, &b, &m);
     printf("Para encontrar a solução de uma congruência do tipo\nax ≡ b mod m, informe a, b e m:\n");
+    scanf("%d %d %d", &a, &b, &m);
     
     // I. achar o mdc(a, m);
     int res = mdc(a, m);
@@ -27,7 +27,7 @@ int main(){
         soluc(b, m, mInterval, solucoes);
     }
     else {
-        printf("A congruência não tem solução.");
+        printf("A congruência não tem solução.\n");
     }
 }
 
@@ -86,12 +86,13 @@ void coeficientes(int a, int m){
 void soluc(int b, int m, int mInterval, int solucoes){
     int sl[solucoes];
     sl[0] = s * b;
-    while(sl[0] > mInterval) sl[0] %= mInterval;
+    while(sl[0] > mInterval || sl[0] < 0) sl[0] %= mInterval;
 
     printf("\nSOLUÇÃO GERAL: %d + %dk, com k inteiro.\n", sl[0], m);
 
     for(int j = 1; j < solucoes; j++){
         sl[j] = (sl[0] + m*k);
+        while(sl[j] > mInterval || sl[j] < 0) sl[j] %= mInterval;
         ++k;
     }
 
