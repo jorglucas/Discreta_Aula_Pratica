@@ -28,6 +28,7 @@ void mdc(int a, int b, int i, int quocientes[]){
     
 int main(){
     int a, b, quocientes[100];
+    printf("Digite a e b [ mdc(a,b) ], para encontrar os coeficientes:\n");
     scanf("%d %d", &a, &b);
     mdc(a, b, 0, quocientes);
 }

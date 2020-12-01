@@ -8,6 +8,7 @@ int mmc = 1, mdc = 1;
 
 int main(){
     int a, b, max;
+    printf("Digite os números:\n");
     scanf("%d %d", &a, &b);
     if(a > b) max = a;
     else if(b > a) max = b;

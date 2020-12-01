@@ -33,6 +33,7 @@ void mdc(int a, int b, int i, int quocientes[]){
     
 int main(){
     int a, b, quocientes[100];
+    printf("Para encontrar o inverso de a mod b, informe a e b:\n");
     scanf("%d %d", &a, &b);
     printf("O inverso de %d (mod %d) = ", a, b);
     mdc(a, b, 0, quocientes);

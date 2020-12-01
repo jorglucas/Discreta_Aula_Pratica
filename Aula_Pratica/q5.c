@@ -11,8 +11,8 @@ int mdc(int a, int b){
 int main(){
     int a, b;
     int res;
+    printf("Digite os números para encontrar o mdc(a, b):\n");
     scanf("%d %d", &a, &b);
     res = a <= b ? mdc(a, b) : mdc(b, a);  
-    // int res = mdc(a, b);
     printf("MDC(%d,%d) = %d\n", a, b, res);
 }

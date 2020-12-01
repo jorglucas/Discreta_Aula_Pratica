@@ -9,7 +9,7 @@ void primo(int num, int div)
     }
     if(num % div == 0)
     {
-        printf("%d x ", div);
+        printf("%d * ", div);
         return primo(num / div, div);
     }
     else
@@ -24,6 +24,5 @@ int main()
     printf("Numero: ");
     scanf("%d", &num);
     primo(num, 2);
-
     return 0;
 }

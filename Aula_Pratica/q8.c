@@ -96,6 +96,7 @@ void soluc(int b, int m, int mInterval, int solucoes){
         ++k;
     }
 
+
     printf("\nSOLUÇÕES POSSIVEIS: %d\n", solucoes);
 
     for(int j = 0; j < solucoes; j++){
